@@ -260,6 +260,22 @@
   opacity: 0.5;
   transform: scale(0.98);
 }
+ .reset-btn {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card);
+  color: var(--mid);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  z-index: 1000;
+}
 </style>
 </head>
 <body>
@@ -560,6 +576,7 @@
   <button class="nav-btn active" id="nav-a" onclick="showDay('a', this)">Einheit A</button>
   <button class="nav-btn" id="nav-b" onclick="showDay('b', this)">Einheit B</button>
   <button class="nav-btn" id="nav-info" onclick="showDay('info', this)">Tipps</button>
+ <button class="reset-btn" onclick="resetWorkout()">Training zurücksetzen</button>
 </nav>
 
 <script>
