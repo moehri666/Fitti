@@ -248,6 +248,18 @@
     background: var(--dark);
     color: var(--accent);
   }
+ .check {
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  accent-color: #C4A882;
+  cursor: pointer;
+}
+
+.exercise.checked {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
 </style>
 </head>
 <body>
@@ -550,6 +562,33 @@ function showDay(id, el) {
   const map = { a: 0, b: 1, info: 2 };
   tabs[map[id]].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+ const checks = document.querySelectorAll('.check');
+
+checks.forEach((check, index) => {
+  // Zustand laden
+  const saved = localStorage.getItem('check-' + index);
+  if (saved === 'true') {
+    check.checked = true;
+    check.closest('.exercise').classList.add('checked');
+  }
+
+  // Beim Klicken speichern
+  check.addEventListener('change', () => {
+    localStorage.setItem('check-' + index, check.checked);
+    check.closest('.exercise').classList.toggle('checked');
+  });
+});
+ function resetWorkout() {
+  if (!confirm("Willst du wirklich alles zurücksetzen?")) return;
+
+  const checks = document.querySelectorAll('.check');
+
+  checks.forEach((check, index) => {
+    check.checked = false;
+    localStorage.removeItem('check-' + index);
+    check.closest('.exercise').classList.remove('checked');
+  });
 }
 </script>
 </body>
