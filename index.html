@@ -1,9 +1,14 @@
+
+
 <!DOCTYPE html>
+
+
 <html lang="de">
 <link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Workout">
+
 
 <link rel="apple-touch-icon" href="icon.png">
 <meta charset="UTF-8">
@@ -13,327 +18,338 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --bg: #F5F2EE;
-    --card: #FFFFFF;
-    --accent: #C4A882;
-    --accent2: #8B6F5E;
-    --dark: #1C1A18;
-    --mid: #6B6560;
-    --light: #B8B3AE;
-    --hd: #E8D5C4;
-    --hd-t: #7A4F3A;
-    --ba: #C8D8C8;
-    --ba-t: #2D5A2D;
-    --hk: #D4C8B0;
-    --hk-t: #5A4A2A;
-    --sc: #C4CED8;
-    --sc-t: #2A4A5A;
-    --ob: #D8C4C4;
-    --ob-t: #5A2A2A;
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
 
-  body {
-    background: var(--bg);
-    font-family: 'DM Sans', sans-serif;
-    color: var(--dark);
-    min-height: 100vh;
-    max-width: 480px;
-    margin: 0 auto;
-    padding-bottom: 100px;
-  }
-
-  header {
-    padding: 48px 24px 28px;
-    background: var(--dark);
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-  }
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -30px;
-    left: 0; right: 0;
-    height: 60px;
-    background: var(--bg);
-    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  }
-  .header-label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-  .header-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 32px;
-    line-height: 1.15;
-    margin-bottom: 6px;
-  }
-  .header-sub {
-    font-size: 14px;
-    color: rgba(255,255,255,0.55);
-    font-weight: 300;
-  }
-
-  .legend {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    padding: 24px 24px 8px;
-  }
-  .badge {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.02em;
-  }
-  .badge-hd { background: var(--hd); color: var(--hd-t); }
-  .badge-ba { background: var(--ba); color: var(--ba-t); }
-  .badge-hk { background: var(--hk); color: var(--hk-t); }
-  .badge-sc { background: var(--sc); color: var(--sc-t); }
-  .badge-ob { background: var(--ob); color: var(--ob-t); }
-
-  .tabs {
-    display: flex;
-    gap: 0;
-    padding: 16px 24px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--light);
-    background: none;
-    border: none;
-    padding: 10px 18px;
-    cursor: pointer;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .tab.active {
-    color: var(--dark);
-    border-bottom-color: var(--accent2);
-  }
-
-  .section {
-    padding: 24px 24px 0;
-  }
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--light);
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  .exercise {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .ex-body { flex: 1; min-width: 0; }
-  .ex-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--dark);
-    margin-bottom: 3px;
-    line-height: 1.3;
-  }
-  .ex-note {
-    font-size: 12.5px;
-    color: var(--mid);
-    line-height: 1.5;
-    margin-bottom: 6px;
-    font-weight: 300;
-  }
-  .ex-badges { display: flex; gap: 4px; flex-wrap: wrap; }
-  .ex-sets {
-    flex-shrink: 0;
-    background: var(--dark);
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 10px;
-    border-radius: var(--radius-sm);
-    text-align: center;
-    line-height: 1.4;
-    max-width: 72px;
-    word-break: break-word;
-  }
-
-  .tip {
-    margin: 16px 24px 0;
-    background: var(--dark);
-    color: rgba(255,255,255,0.7);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    font-size: 13px;
-    line-height: 1.6;
-    font-weight: 300;
-  }
-  .tip strong { color: var(--accent); font-weight: 500; }
-
-  .info-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 18px;
-    margin-bottom: 10px;
-  }
-  .info-card-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .info-card-text {
-    font-size: 13px;
-    color: var(--mid);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .day { display: none; }
-  .day.visible { display: block; }
-
-  .nav {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    max-width: 480px;
-    margin: 0 auto;
-    background: var(--card);
-    border-top: 1px solid rgba(0,0,0,0.07);
-    display: flex;
-    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-    gap: 8px;
-  }
-  .nav-btn {
-    flex: 1;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 12px 8px;
-    border-radius: var(--radius-sm);
-    border: none;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--mid);
-    background: var(--bg);
-  }
-  .nav-btn.active {
-    background: var(--dark);
-    color: var(--accent);
-  }
- .check {
-  width: 20px;
-  height: 20px;
-  margin-top: 4px;
-  accent-color: #C4A882;
-  cursor: pointer;
+:root {
+–bg: #F5F2EE;
+–card: #FFFFFF;
+–accent: #C4A882;
+–accent2: #8B6F5E;
+–dark: #1C1A18;
+–mid: #6B6560;
+–light: #B8B3AE;
+–hd: #E8D5C4;
+–hd-t: #7A4F3A;
+–ba: #C8D8C8;
+–ba-t: #2D5A2D;
+–hk: #D4C8B0;
+–hk-t: #5A4A2A;
+–sc: #C4CED8;
+–sc-t: #2A4A5A;
+–ob: #D8C4C4;
+–ob-t: #5A2A2A;
+–radius: 16px;
+–radius-sm: 10px;
 }
 
-.exercise.checked {
-  opacity: 0.5;
-  transform: scale(0.98);
+
+body {
+background: var(–bg);
+font-family: ‘DM Sans’, sans-serif;
+color: var(–dark);
+min-height: 100vh;
+max-width: 480px;
+margin: 0 auto;
+padding-bottom: 100px;
 }
- .reset-btn {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--card);
-  color: var(--mid);
-  border: none;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  cursor: pointer;
-  z-index: 1000;
+
+
+header {
+padding: 48px 24px 28px;
+background: var(–dark);
+color: #fff;
+position: relative;
+overflow: hidden;
 }
- .weight-info {
+header::after {
+content: ‘’;
+position: absolute;
+bottom: -30px;
+left: 0; right: 0;
+height: 60px;
+background: var(–bg);
+border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.header-label {
+font-size: 11px;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(–accent);
+margin-bottom: 8px;
+font-weight: 500;
+}
+.header-title {
+font-family: ‘DM Serif Display’, serif;
+font-size: 32px;
+line-height: 1.15;
+margin-bottom: 6px;
+}
+.header-sub {
+font-size: 14px;
+color: rgba(255,255,255,0.55);
+font-weight: 300;
+}
+
+
+.legend {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+padding: 24px 24px 8px;
+}
+.badge {
+font-size: 11px;
+font-weight: 500;
+padding: 4px 10px;
+border-radius: 20px;
+letter-spacing: 0.02em;
+}
+.badge-hd { background: var(–hd); color: var(–hd-t); }
+.badge-ba { background: var(–ba); color: var(–ba-t); }
+.badge-hk { background: var(–hk); color: var(–hk-t); }
+.badge-sc { background: var(–sc); color: var(–sc-t); }
+.badge-ob { background: var(–ob); color: var(–ob-t); }
+
+
+.tabs {
+display: flex;
+gap: 0;
+padding: 16px 24px 0;
+border-bottom: 1px solid rgba(0,0,0,0.08);
+overflow-x: auto;
+scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 14px;
+font-weight: 500;
+color: var(–light);
+background: none;
+border: none;
+padding: 10px 18px;
+cursor: pointer;
+white-space: nowrap;
+border-bottom: 2px solid transparent;
+margin-bottom: -1px;
+transition: color 0.2s, border-color 0.2s;
+}
+.tab.active {
+color: var(–dark);
+border-bottom-color: var(–accent2);
+}
+
+
+.section {
+padding: 24px 24px 0;
+}
+.section-label {
 font-size: 10px;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(–light);
+font-weight: 600;
+margin-bottom: 12px;
+}
+
+
+/* — Exercise card — */
+.exercise {
+background: var(–card);
+border-radius: var(–radius);
+padding: 16px;
+margin-bottom: 10px;
+display: flex;
+align-items: flex-start;
+gap: 12px;
+}
+.ex-body { flex: 1; min-width: 0; }
+.ex-name {
+font-size: 15px;
+font-weight: 600;
+color: var(–dark);
+margin-bottom: 3px;
+line-height: 1.3;
+}
+.ex-note {
+font-size: 12.5px;
+color: var(–mid);
+line-height: 1.5;
+margin-bottom: 6px;
+font-weight: 300;
+}
+.ex-badges { display: flex; gap: 4px; flex-wrap: wrap; }
+
+
+/* Right-side column: sets badge + optional weight input below */
+.ex-right {
+flex-shrink: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 6px;
+}
+.ex-sets {
+background: var(–dark);
+color: var(–accent);
+font-size: 11px;
+font-weight: 600;
+padding: 6px 10px;
+border-radius: var(–radius-sm);
+text-align: center;
+line-height: 1.4;
+width: 72px;
+word-break: break-word;
+}
+
+
+/* Weight input */
+.weight {
+width: 72px;
+padding: 5px 8px;
+border: 1.5px solid rgba(0,0,0,0.1);
+border-radius: var(–radius-sm);
+font-family: ‘DM Sans’, sans-serif;
+font-size: 12px;
+color: var(–dark);
+background: var(–bg);
+text-align: center;
+appearance: textfield;
+-moz-appearance: textfield;
+}
+.weight::-webkit-inner-spin-button,
+.weight::-webkit-outer-spin-button { -webkit-appearance: none; }
+.weight::placeholder { color: var(–light); }
+
+
+.weight-info {
+font-size: 10px;
+color: var(–light);
+text-align: center;
+line-height: 1.3;
+}
+.weight-up   { color: #4CAF50; }
+.weight-same { color: #999; }
+.weight-down { color: #E57373; }
+
+
+/* Checkbox */
+.check {
+width: 20px;
+height: 20px;
 margin-top: 4px;
-color: var(--light);
+accent-color: #C4A882;
+cursor: pointer;
+flex-shrink: 0;
+}
+.exercise.checked {
+opacity: 0.5;
+transform: scale(0.98);
 }
 
-.weight-up {
-color: #4CAF50;
+
+.tip {
+margin: 16px 24px 0;
+background: var(–dark);
+color: rgba(255,255,255,0.7);
+border-radius: var(–radius);
+padding: 16px 18px;
+font-size: 13px;
+line-height: 1.6;
+font-weight: 300;
+}
+.tip strong { color: var(–accent); font-weight: 500; }
+
+
+.info-card {
+background: var(–card);
+border-radius: var(–radius);
+padding: 18px;
+margin-bottom: 10px;
+}
+.info-card-title {
+font-size: 14px;
+font-weight: 600;
+margin-bottom: 6px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.info-card-text {
+font-size: 13px;
+color: var(–mid);
+line-height: 1.6;
+font-weight: 300;
+}
+.dot {
+width: 8px; height: 8px;
+border-radius: 50%;
+flex-shrink: 0;
 }
 
-.weight-same {
-color: #999;
+
+.day { display: none; }
+.day.visible { display: block; }
+
+
+.nav {
+position: fixed;
+bottom: 0; left: 0; right: 0;
+max-width: 480px;
+margin: 0 auto;
+background: var(–card);
+border-top: 1px solid rgba(0,0,0,0.07);
+display: flex;
+padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+gap: 8px;
+}
+.nav-btn {
+flex: 1;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 13px;
+font-weight: 500;
+padding: 12px 8px;
+border-radius: var(–radius-sm);
+border: none;
+cursor: pointer;
+transition: all 0.15s;
+color: var(–mid);
+background: var(–bg);
+}
+.nav-btn.active {
+background: var(–dark);
+color: var(–accent);
 }
 
-.weight-down {
-color: #E57373;
-} 
-  .ex-footer {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    ﻿
-    .ex-sets {
-      background: var(--dark);
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: var(--radius-sm);
-      display: inline-block;
-      width: fit-content;
-    }
-    ﻿
-    .weight {
-      width: 80px;
-      padding: 6px;
-      border-radius: 8px;
-      border: 1px solid rgba(0,0,0,0.08);
-      font-size: 12px;
-      text-align: center;
-      background: #FFF5F8;
-    }
-    ﻿
-    .weight-info {
-      font-size: 10px;
-      color: var(--light);
-    }
+
+.reset-btn {
+position: fixed;
+bottom: 80px;
+left: 50%;
+transform: translateX(-50%);
+background: var(–card);
+color: var(–mid);
+border: none;
+padding: 10px 16px;
+border-radius: 999px;
+font-size: 12px;
+font-weight: 500;
+box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+cursor: pointer;
+z-index: 1000;
+}
 </style>
+
+
 </head>
 <body>
+
 
 <header>
   <div class="header-label">Dein Trainingsplan</div>
   <div class="header-title">1–2× pro<br>Woche</div>
   <div class="header-sub">Ganzkörper · Figur & Haltung</div>
 </header>
+
 
 <div class="legend">
   <span class="badge badge-hd">Hip Dips</span>
@@ -343,263 +359,335 @@ color: #E57373;
   <span class="badge badge-ob">Oberschenkel</span>
 </div>
 
+
 <div class="tabs">
   <button class="tab active" onclick="showDay('a', this)">Einheit A</button>
   <button class="tab" onclick="showDay('b', this)">Einheit B</button>
   <button class="tab" onclick="showDay('info', this)">Tipps & Info</button>
 </div>
 
-<!-- EINHEIT A -->
+
+<!-- ==================== EINHEIT A ==================== -->
+
+
 <div class="day visible" id="day-a">
   <div class="section">
     <div class="section-label">Warm-up — 5 min</div>
 
-    <div class="exercise">
-      <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Cat-Cow + Hüftkreisen</div>
-        <div class="ex-note">Wirbelsäule mobilisieren, Hohlkreuz lösen</div>
-        <div class="ex-badges"><span class="badge badge-hk">Hohlkreuz</span></div>
-      </div>
-           <div class="ex-sets">2 × 10</div>
-     </div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Glute Bridge</div>
-        <div class="ex-note">Gesäß & Rumpf aktivieren, Becken neutral halten</div>
-        <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span><span class="badge badge-hk">Hohlkreuz</span></div>
-      </div>
-      <div class="ex-sets">2 × 12</div>
-    </div>
+```
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Cat-Cow + Hüftkreisen</div>
+    <div class="ex-note">Wirbelsäule mobilisieren, Hohlkreuz lösen</div>
+    <div class="ex-badges"><span class="badge badge-hk">Hohlkreuz</span></div>
   </div>
+  <div class="ex-right">
+    <div class="ex-sets">2 × 10</div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Glute Bridge</div>
+    <div class="ex-note">Gesäß & Rumpf aktivieren, Becken neutral halten</div>
+    <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span><span class="badge badge-hk">Hohlkreuz</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">2 × 12</div>
+  </div>
+</div>
+```
+
+
+  </div>
+
 
   <div class="section">
     <div class="section-label">Hauptteil</div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Bulgarian Split Squat</div>
-        <div class="ex-note">Hinterbein auf Bank, Knie über Zehen, Oberkörper aufrecht</div>
-        <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span><span class="badge badge-ob">Oberschenkel</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 10</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Hip Thrust</div>
-        <div class="ex-note">Maschine oder Langhantel — wichtigste Übung für Gluteus medius</div>
-        <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">4 × 12</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
+```
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Bulgarian Split Squat</div>
+    <div class="ex-note">Hinterbein auf Bank, Knie über Zehen, Oberkörper aufrecht</div>
+    <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span><span class="badge badge-ob">Oberschenkel</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 10</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Seated Lateral Raise</div>
-        <div class="ex-note">Leichte Hanteln, Ellenbogen leicht gebeugt, kontrolliert</div>
-        <div class="ex-badges"><span class="badge badge-sc">Schultern</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 15</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Dead Bug</div>
-        <div class="ex-note">Lendenwirbel bleibt am Boden — perfekter Hohlkreuz-Ausgleich</div>
-        <div class="ex-badges"><span class="badge badge-ba">Bauch</span><span class="badge badge-hk">Hohlkreuz</span></div>
-      </div>
-      <div class="ex-sets">3 × 10</div>
-       </div>
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Hip Thrust</div>
+    <div class="ex-note">Maschine oder Langhantel — wichtigste Übung für Gluteus medius</div>
+    <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">4 × 12</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Sumo Deadlift</div>
-        <div class="ex-note">Breite Stance aktiviert Adduktoren & innere Oberschenkel</div>
-        <div class="ex-badges"><span class="badge badge-ob">Oberschenkel</span><span class="badge badge-hd">Hip Dips</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 10</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Face Pull am Kabel</div>
-        <div class="ex-note">Außenrotation der Schulter, runder Deltamuskel, bessere Haltung</div>
-        <div class="ex-badges"><span class="badge badge-sc">Schultern</span><span class="badge badge-hk">Hohlkreuz</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 15</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Seated Lateral Raise</div>
+    <div class="ex-note">Leichte Hanteln, Ellenbogen leicht gebeugt, kontrolliert</div>
+    <div class="ex-badges"><span class="badge badge-sc">Schultern</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 15</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Dead Bug</div>
+    <div class="ex-note">Lendenwirbel bleibt am Boden — perfekter Hohlkreuz-Ausgleich</div>
+    <div class="ex-badges"><span class="badge badge-ba">Bauch</span><span class="badge badge-hk">Hohlkreuz</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 10</div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Sumo Deadlift</div>
+    <div class="ex-note">Breite Stance aktiviert Adduktoren & innere Oberschenkel</div>
+    <div class="ex-badges"><span class="badge badge-ob">Oberschenkel</span><span class="badge badge-hd">Hip Dips</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 10</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Face Pull am Kabel</div>
+    <div class="ex-note">Außenrotation der Schulter, runder Deltamuskel, bessere Haltung</div>
+    <div class="ex-badges"><span class="badge badge-sc">Schultern</span><span class="badge badge-hk">Hohlkreuz</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 15</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+```
+
+
   </div>
 
+
   <div class="section">
-       <div class="section-label">Core-Finisher</div>
+    <div class="section-label">Core-Finisher</div>
     <div class="exercise">
-     <input type="checkbox" class="check">
+      <input type="checkbox" class="check">
       <div class="ex-body">
         <div class="ex-name">Plank (Unterarmstütz)</div>
         <div class="ex-note">Becken neutral, Po nicht hochschieben</div>
         <div class="ex-badges"><span class="badge badge-ba">Bauch</span><span class="badge badge-hk">Hohlkreuz</span></div>
       </div>
-      <div class="ex-sets">3 × 45 Sek</div>
+      <div class="ex-right">
+        <div class="ex-sets">3 × 45 Sek</div>
+      </div>
     </div>
   </div>
+
 
   <div class="tip"><strong>Dauer:</strong> ca. 50–60 min &nbsp;·&nbsp; <strong>Pause:</strong> 60–90 sek zwischen Sätzen</div>
   <div style="height: 16px;"></div>
 </div>
 
-<!-- EINHEIT B -->
+
+<!-- ==================== EINHEIT B ==================== -->
+
+
 <div class="day" id="day-b">
   <div class="section">
     <div class="section-label">Warm-up — 5 min</div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Beckenkippen + Hip Flexor Stretch</div>
-        <div class="ex-note">Hüftbeuger dehnen — wichtig gegen Hohlkreuz</div>
-        <div class="ex-badges"><span class="badge badge-hk">Hohlkreuz</span></div>
-      </div>
-      <div class="ex-sets">2 × 30 Sek</div>
-    </div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Banded Clamshell</div>
-        <div class="ex-note">Mini-Band um Knie, Gluteus medius aktivieren</div>
-        <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">2 × 15</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
+```
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Beckenkippen + Hip Flexor Stretch</div>
+    <div class="ex-note">Hüftbeuger dehnen — wichtig gegen Hohlkreuz</div>
+    <div class="ex-badges"><span class="badge badge-hk">Hohlkreuz</span></div>
   </div>
+  <div class="ex-right">
+    <div class="ex-sets">2 × 30 Sek</div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Banded Clamshell</div>
+    <div class="ex-note">Mini-Band um Knie, Gluteus medius aktivieren</div>
+    <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">2 × 15</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+```
+
+
+  </div>
+
 
   <div class="section">
     <div class="section-label">Hauptteil</div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Goblet Squat</div>
-        <div class="ex-note">Hantel oder Kettlebell vor der Brust, Kniewinkel breit</div>
-        <div class="ex-badges"><span class="badge badge-ob">Oberschenkel</span><span class="badge badge-ba">Bauch</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 12</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
 
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Kabelzug Abduktion</div>
-        <div class="ex-note">Bein seitlich wegführen — direkt für Gluteus medius (Hip Dips)</div>
-        <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 15</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
-
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Arnold Press (sitzend)</div>
-        <div class="ex-note">Dreht durch alle Schulterköpfe, gibt runden Deltamuskel</div>
-        <div class="ex-badges"><span class="badge badge-sc">Schultern</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 12</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
-
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Adduktorenmaschine</div>
-        <div class="ex-note">Kontrollierte Bewegung, kein Schwung — innere Oberschenkel</div>
-        <div class="ex-badges"><span class="badge badge-ob">Oberschenkel</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 15</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
-
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Pallof Press am Kabel</div>
-        <div class="ex-note">Rotationswiderstand für tiefen Core und Rumpfstabilität</div>
-        <div class="ex-badges"><span class="badge badge-ba">Bauch</span><span class="badge badge-hk">Hohlkreuz</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 10</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
-
-    <div class="exercise">
-     <input type="checkbox" class="check">
-      <div class="ex-body">
-        <div class="ex-name">Rear Delt Fly</div>
-        <div class="ex-note">Kabel oder Butterfly reverse — hintere Schulter für runden Look</div>
-        <div class="ex-badges"><span class="badge badge-sc">Schultern</span><span class="badge badge-hk">Hohlkreuz</span></div>
-      </div>
-     <div class="ex-footer">
-      <div class="ex-sets">3 × 15</div>
-     <input type="number" class="weight" placeholder="kg">
-<div class="weight-info"></div>
-    </div>
+```
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Goblet Squat</div>
+    <div class="ex-note">Hantel oder Kettlebell vor der Brust, Kniewinkel breit</div>
+    <div class="ex-badges"><span class="badge badge-ob">Oberschenkel</span><span class="badge badge-ba">Bauch</span></div>
   </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 12</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Kabelzug Abduktion</div>
+    <div class="ex-note">Bein seitlich wegführen — direkt für Gluteus medius (Hip Dips)</div>
+    <div class="ex-badges"><span class="badge badge-hd">Hip Dips</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 15</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Arnold Press (sitzend)</div>
+    <div class="ex-note">Dreht durch alle Schulterköpfe, gibt runden Deltamuskel</div>
+    <div class="ex-badges"><span class="badge badge-sc">Schultern</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 12</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Adduktorenmaschine</div>
+    <div class="ex-note">Kontrollierte Bewegung, kein Schwung — innere Oberschenkel</div>
+    <div class="ex-badges"><span class="badge badge-ob">Oberschenkel</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 15</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Pallof Press am Kabel</div>
+    <div class="ex-note">Rotationswiderstand für tiefen Core und Rumpfstabilität</div>
+    <div class="ex-badges"><span class="badge badge-ba">Bauch</span><span class="badge badge-hk">Hohlkreuz</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 10</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <input type="checkbox" class="check">
+  <div class="ex-body">
+    <div class="ex-name">Rear Delt Fly</div>
+    <div class="ex-note">Kabel oder Butterfly reverse — hintere Schulter für runden Look</div>
+    <div class="ex-badges"><span class="badge badge-sc">Schultern</span><span class="badge badge-hk">Hohlkreuz</span></div>
+  </div>
+  <div class="ex-right">
+    <div class="ex-sets">3 × 15</div>
+    <input type="number" class="weight" placeholder="kg">
+    <div class="weight-info"></div>
+  </div>
+</div>
+```
+
+
+  </div>
+
 
   <div class="section">
     <div class="section-label">Core-Finisher</div>
     <div class="exercise">
-     <input type="checkbox" class="check">
+      <input type="checkbox" class="check">
       <div class="ex-body">
         <div class="ex-name">Hollow Body Hold</div>
         <div class="ex-note">Lendenwirbel fest am Boden, Beine gestreckt tief halten</div>
         <div class="ex-badges"><span class="badge badge-ba">Bauch</span></div>
       </div>
-      <div class="ex-sets">3 × 25 sek</div>
+      <div class="ex-right">
+        <div class="ex-sets">3 × 25 sek</div>
+      </div>
     </div>
   </div>
+
 
   <div class="tip"><strong>Dauer:</strong> ca. 50–60 min &nbsp;·&nbsp; <strong>Pause:</strong> 60–90 sek zwischen Sätzen</div>
   <div style="height: 16px;"></div>
 </div>
 
-<!-- INFO -->
+
+<!-- ==================== INFO ==================== -->
+
+
 <div class="day" id="day-info">
   <div class="section">
     <div class="section-label">Wochenstruktur</div>
@@ -613,34 +701,45 @@ color: #E57373;
     </div>
   </div>
 
+
   <div class="section">
     <div class="section-label">Zu deinen Zielen</div>
 
-    <div class="info-card">
-      <div class="info-card-title"><span class="badge badge-hd" style="font-size:11px">Hip Dips</span></div>
-      <div class="info-card-text">Entstehen durch Knochenstruktur und lassen sich nicht wegtrainieren — aber mit Muskelmasse am Gluteus medius optisch stark reduzieren. Hip Thrust und Kabelabduktion sind dafür die wichtigsten Übungen. Ergebnisse nach ca. 8–12 Wochen sichtbar.</div>
-    </div>
 
-    <div class="info-card">
-      <div class="info-card-title"><span class="badge badge-ba" style="font-size:11px">Bauch</span></div>
-      <div class="info-card-text">Crunches allein helfen kaum. Der tiefe Core (Dead Bug, Plank, Hollow Body) macht den Unterschied — er zieht den Bauch von innen flach. Dazu ausreichend Protein essen und Stress reduzieren.</div>
-    </div>
+```
+<div class="info-card">
+  <div class="info-card-title"><span class="badge badge-hd" style="font-size:11px">Hip Dips</span></div>
+  <div class="info-card-text">Entstehen durch Knochenstruktur und lassen sich nicht wegtrainieren — aber mit Muskelmasse am Gluteus medius optisch stark reduzieren. Hip Thrust und Kabelabduktion sind dafür die wichtigsten Übungen. Ergebnisse nach ca. 8–12 Wochen sichtbar.</div>
+</div>
 
-    <div class="info-card">
-      <div class="info-card-title"><span class="badge badge-hk" style="font-size:11px">Hohlkreuz</span></div>
-      <div class="info-card-text">Ursache: schwacher Core + verkürzte Hüftbeuger. Dead Bug und Plank trainieren dagegen. Zusätzlich täglich 30 sek Hüftbeuger-Dehnung pro Seite — auch an trainingsfreien Tagen.</div>
-    </div>
 
-    <div class="info-card">
-      <div class="info-card-title"><span class="badge badge-sc" style="font-size:11px">Schultern</span></div>
-      <div class="info-card-text">Lateral Raise + Arnold Press für Volumen, Face Pull + Rear Delt Fly für den runden Look und gesunde Gelenke. Ideal: 2 Zugübungen pro Druckübung.</div>
-    </div>
+<div class="info-card">
+  <div class="info-card-title"><span class="badge badge-ba" style="font-size:11px">Bauch</span></div>
+  <div class="info-card-text">Crunches allein helfen kaum. Der tiefe Core (Dead Bug, Plank, Hollow Body) macht den Unterschied — er zieht den Bauch von innen flach. Dazu ausreichend Protein essen und Stress reduzieren.</div>
+</div>
 
-    <div class="info-card">
-      <div class="info-card-title"><span class="badge badge-ob" style="font-size:11px">Oberschenkel</span></div>
-      <div class="info-card-text">Fettabbau an einer bestimmten Stelle funktioniert nicht — aber Adduktoren- und Abduktorenübungen straffen und formen deutlich. Split Squat und Sumo Deadlift verbrennen zusätzlich Kalorien.</div>
-    </div>
+
+<div class="info-card">
+  <div class="info-card-title"><span class="badge badge-hk" style="font-size:11px">Hohlkreuz</span></div>
+  <div class="info-card-text">Ursache: schwacher Core + verkürzte Hüftbeuger. Dead Bug und Plank trainieren dagegen. Zusätzlich täglich 30 sek Hüftbeuger-Dehnung pro Seite — auch an trainingsfreien Tagen.</div>
+</div>
+
+
+<div class="info-card">
+  <div class="info-card-title"><span class="badge badge-sc" style="font-size:11px">Schultern</span></div>
+  <div class="info-card-text">Lateral Raise + Arnold Press für Volumen, Face Pull + Rear Delt Fly für den runden Look und gesunde Gelenke. Ideal: 2 Zugübungen pro Druckübung.</div>
+</div>
+
+
+<div class="info-card">
+  <div class="info-card-title"><span class="badge badge-ob" style="font-size:11px">Oberschenkel</span></div>
+  <div class="info-card-text">Fettabbau an einer bestimmten Stelle funktioniert nicht — aber Adduktoren- und Abduktorenübungen straffen und formen deutlich. Split Squat und Sumo Deadlift verbrennen zusätzlich Kalorien.</div>
+</div>
+```
+
+
   </div>
+
 
   <div class="section">
     <div class="section-label">Progression</div>
@@ -656,13 +755,17 @@ color: #E57373;
   <div style="height: 16px;"></div>
 </div>
 
+
 <!-- NAV -->
+
+
 <nav class="nav">
   <button class="nav-btn active" id="nav-a" onclick="showDay('a', this)">Einheit A</button>
   <button class="nav-btn" id="nav-b" onclick="showDay('b', this)">Einheit B</button>
   <button class="nav-btn" id="nav-info" onclick="showDay('info', this)">Tipps</button>
- <button class="reset-btn" onclick="resetWorkout()">Training zurücksetzen</button>
 </nav>
+<button class="reset-btn" onclick="resetWorkout()">Training zurücksetzen</button>
+
 
 <script>
 function showDay(id, el) {
@@ -675,87 +778,86 @@ function showDay(id, el) {
   tabs[map[id]].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
- const checks = document.querySelectorAll('.check');
 
+
+// Checkboxen
+const checks = document.querySelectorAll('.check');
 checks.forEach((check, index) => {
-  // Zustand laden
   const saved = localStorage.getItem('check-' + index);
   if (saved === 'true') {
     check.checked = true;
     check.closest('.exercise').classList.add('checked');
   }
-  
-  // Beim Klicken speichern
   check.addEventListener('change', () => {
     localStorage.setItem('check-' + index, check.checked);
-    check.closest('.exercise').classList.toggle('checked');
+    check.closest('.exercise').classList.toggle('checked', check.checked);
   });
 });
-function resetWorkout() {
-if (!confirm("Training wirklich zurücksetzen?")) return;
 
-const checks = document.querySelectorAll('.check');
+
+// Gewichte
 const weights = document.querySelectorAll('.weight');
-
-// Checkboxen resetten
-checks.forEach((check, index) => {
-check.checked = false;
-localStorage.removeItem('check-' + index);
-check.closest('.exercise').classList.remove('checked');
-});
-
-// Gewichte verschieben
 weights.forEach((input, index) => {
-const currentKey = 'weight-current-' + index;
-const lastKey = 'weight-last-' + index;
+  const info = input.parentElement.querySelector('.weight-info');
+  const currentKey = 'weight-current-' + index;
+  const lastKey = 'weight-last-' + index;
 
-const current = localStorage.getItem(currentKey);
 
-if (current) {
-localStorage.setItem(lastKey, current);
-}
+  const savedCurrent = localStorage.getItem(currentKey);
+  const savedLast = localStorage.getItem(lastKey);
 
-localStorage.removeItem(currentKey);
-input.value = '';
+
+  if (savedCurrent) input.value = savedCurrent;
+
+
+  if (savedLast && info) {
+    info.innerText = "Last: " + savedLast + " kg";
+    if (savedCurrent) {
+      if (+savedCurrent > +savedLast) {
+        info.classList.add('weight-up');
+        info.innerText += " ↑";
+      } else if (+savedCurrent < +savedLast) {
+        info.classList.add('weight-down');
+        info.innerText += " ↓";
+      } else {
+        info.classList.add('weight-same');
+      }
+    }
+  }
+
+
+  input.addEventListener('input', () => {
+    localStorage.setItem(currentKey, input.value);
+  });
 });
 
-location.reload(); // aktualisiert Anzeige
+
+// Reset
+function resetWorkout() {
+  if (!confirm("Training wirklich zurücksetzen?")) return;
+
+
+  checks.forEach((check, index) => {
+    check.checked = false;
+    localStorage.removeItem('check-' + index);
+    check.closest('.exercise').classList.remove('checked');
+  });
+
+
+  weights.forEach((input, index) => {
+    const currentKey = 'weight-current-' + index;
+    const lastKey = 'weight-last-' + index;
+    const current = localStorage.getItem(currentKey);
+    if (current) localStorage.setItem(lastKey, current);
+    localStorage.removeItem(currentKey);
+    input.value = '';
+  });
+
+
+  location.reload();
 }
-
- //Gewicht speichern und beibehalten
- const weights = document.querySelectorAll('.weight');
-
-weights.forEach((input, index) => {
-const info = input.parentElement.querySelector('.weight-info');
-
-const currentKey = 'weight-current-' + index;
-const lastKey = 'weight-last-' + index;
-
-const savedCurrent = localStorage.getItem(currentKey);
-const savedLast = localStorage.getItem(lastKey);
-
-if (savedCurrent) input.value = savedCurrent;
-
-if (savedLast && info) {
-info.innerText = "Last: " + savedLast + " kg";
-
-if (savedCurrent) {
-if (+savedCurrent > +savedLast) {
-info.classList.add('weight-up');
-info.innerText += " ↑";
-} else if (+savedCurrent < +savedLast) {
-info.classList.add('weight-down');
-info.innerText += " ↓";
-} else {
-info.classList.add('weight-same');
-}
-}
-}
-
-input.addEventListener('input', () => {
-localStorage.setItem(currentKey, input.value);
-});
-});
 </script>
+
+
 </body>
 </html>
