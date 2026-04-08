@@ -360,6 +360,43 @@ white-space: nowrap;
 transition: all 0.18s;
 }
 .reset-btn:hover { background: #fff; color: var(--accent2); }
+  .flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  backface-visibility: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.flip-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  transform: rotateY(180deg);
+  padding: 16px;
+}
+
+.ex-detail img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 10px;
+}
 </style>
 
 <body>
@@ -390,8 +427,12 @@ transition: all 0.18s;
 <div class="section">
 <div class="section-label">Warm-up — 5 min</div>
 
-```
 <div class="exercise">
+  <div class="exercise flip-card">
+  <div class="flip-inner">
+    
+    <!-- FRONT -->
+    <div class="flip-front">
 <input type="checkbox" class="check">
 <div class="ex-body">
 <div class="ex-name">Cat-Cow + Hüftkreisen</div>
@@ -402,7 +443,18 @@ transition: all 0.18s;
 <div class="ex-sets">2 × 10</div>
 </div>
 </div>
-
+ <!-- BACK -->
+    <div class="flip-back">
+      <div class="ex-detail">
+        <strong>Ausführung:</strong><br>
+         Vierfüßlerstand auf der Matte.
+         Ausatmen. Bauchnabel einziehen und Becken kippen. Wirbelsäule bewegt sich Richtung Decke - Katze. 
+         Einatmen. Bauch in Richtung Boden senken, Schulterblätter nach hinten, Blick nach vorne. Rücken ist nun gebeugt, Brust geöffnet.
+        <br><br>
+        <img src="catcow.png" alt="Cat Cow">
+      </div>
+    </div>
+    
 <div class="exercise">
 <input type="checkbox" class="check">
 <div class="ex-body">
@@ -414,14 +466,12 @@ transition: all 0.18s;
 <div class="ex-sets">2 × 12</div>
 </div>
 </div>
-```
 
 </div>
 
 <div class="section">
 <div class="section-label">Hauptteil</div>
 
-```
 <div class="exercise">
 <input type="checkbox" class="check">
 <div class="ex-body">
