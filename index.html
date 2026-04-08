@@ -861,6 +861,15 @@ input.value = '';
 
 location.reload();
 }
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+
+    // verhindert Flip wenn Checkbox geklickt wird
+    if (e.target.classList.contains('check') || e.target.classList.contains('weight')) return;
+
+    card.classList.toggle('flipped');
+  });
+});  
 </script>
 
 </body>
