@@ -419,6 +419,79 @@ header::after {
 
 /* ── SPACER ── */
 .spacer { height: 20px; }
+  /* ── ÜBUNGSBESCHREIBUNG ── */
+.ex-desc-card {
+  background:    var(--color-card);
+  border-radius: var(--radius);
+  border:        1px solid var(--border-accent);
+  box-shadow:    var(--shadow-card);
+  margin-bottom: 10px;
+  overflow:      hidden;
+}
+.ex-desc-media {
+  width:           100%;
+  aspect-ratio:    16 / 9;
+  background:      #F5F0EE;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  border-bottom:   1px solid var(--border-accent);
+  overflow:        hidden;
+}
+.ex-desc-media img {
+  width:      100%;
+  height:     100%;
+  object-fit: cover;
+  display:    block;
+}
+.ex-desc-body {
+  padding: 14px 16px 16px;
+}
+.ex-desc-header {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+  margin-bottom: 8px;
+  flex-wrap:   wrap;
+}
+.ex-desc-name {
+  font-size:   15px;
+  font-weight: 600;
+  color:       var(--color-dark);
+}
+.ex-desc-text {
+  font-size:   13px;
+  color:       var(--color-mid);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.ex-desc-steps {
+  list-style:    none;
+  margin-top:    10px;
+  padding-top:   10px;
+  border-top:    1px solid var(--border-accent);
+  display:       flex;
+  flex-direction: column;
+  gap:           5px;
+}
+.ex-desc-steps li {
+  font-size:   12.5px;
+  color:       var(--color-mid);
+  line-height: 1.55;
+  padding-left: 14px;
+  position:    relative;
+  font-weight: 300;
+}
+.ex-desc-steps li::before {
+  content:      '';
+  position:     absolute;
+  left:         0;
+  top:          7px;
+  width:        5px;
+  height:       5px;
+  border-radius: 50%;
+  background:   var(--color-accent);
+}
 </style>
 </head>
 
@@ -484,6 +557,7 @@ header::after {
   <div class="section">
     <div class="section-label">Hauptteil</div>
 
+    
     <article class="exercise">
       <input type="checkbox" class="check" aria-label="Abgehakt: Bulgarian Split Squat">
       <div class="ex-body">
@@ -772,7 +846,7 @@ header::after {
   </div>
 
   <div class="section">
-    <div class="section-label">Zu deinen Zielen</div>
+    <div class="section-label">Zu meinen Ziele</div>
 
     <div class="info-card">
       <div class="info-card-title"><span class="badge badge-hd">Hip Dips</span></div>
@@ -796,6 +870,130 @@ header::after {
     </div>
   </div>
 
+<div class="section">
+  <div class="section-label">Übungsbeschreibung</div>
+
+  <!-- ── CAT COW ── -->
+  <div class="ex-desc-card">
+    <div class="ex-desc-media">
+     
+      <-- Grafik: <img src="catcow.png" alt="Name der Übung"> -->
+      
+    </div>
+    <div class="ex-desc-body">
+      <div class="ex-desc-header">
+        <div class="ex-desc-name">Cat Cow</div>
+        <span class="badge badge-hd">Hohlkreuz</span>
+        <!-- weitere badges nach Bedarf -->
+      </div>
+      <div class="ex-desc-text">
+        Im Vierfüßlerstand (Hände unter Schultern, Knie unter Hüfte):
+      </div>
+      <ul class="ex-desc-steps">
+        <li>Einatmen: Rücken durchhängen lassen, Brust nach vorne (Hohlkreuz)</li>
+        <li>Ausatmen: Rücken rund machen, Kinn zur Brust (Katzenbuckel)</li>
+        <li>Ruhig und fließend im Wechsel bewegen</li>
+      </ul>
+    </div>
+  </div>
+
+   <!-- ── CLUTE BRIDGE ── -->
+  <div class="ex-desc-card">
+    <div class="ex-desc-media">
+     
+      <-- Grafik: <img src="Glutebridge.png" alt="Name der Übung"> -->
+      
+    </div>
+    <div class="ex-desc-body">
+      <div class="ex-desc-header">
+        <div class="ex-desc-name">Glute Bridge</div>
+        <span class="badge badge-hd">Hip Dips</span>
+        <span class="badge badge-hd">Hohlkreuz</span>
+      </div>
+      <div class="ex-desc-text">
+        Rückenlage, Füße hüftbreit aufgestellt, Arme neben dem Körper:
+      </div>
+      <ul class="ex-desc-steps">
+        <li>Gesäß anspannen und Becken nach oben drücken</li>
+        <li>Körper bildet eine Linie von Schultern bis Knie</li>
+        <li>Kurz halten, dann langsam absenken</li>
+      </ul>
+    </div>
+  </div>
+
+   <!-- ── Bulgarian Split Squat ── -->
+  <div class="ex-desc-card">
+    <div class="ex-desc-media">
+     
+      <-- Grafik: <img src="BGSQ.png" alt="Name der Übung"> -->
+      
+    </div>
+    <div class="ex-desc-body">
+      <div class="ex-desc-header">
+        <div class="ex-desc-name">Bulgarian Split Squat</div>
+        <span class="badge badge-hd">Hip Dips</span>
+        <span class="badge badge-hd">Oberschenkel</span>
+      </div>
+      <div class="ex-desc-text">
+        Ein Bein vorne auf dem Boden, hinteres Bein erhöht (z. B. Bank):
+      </div>
+      <ul class="ex-desc-steps">
+        <li>Oberkörper aufrecht halten</li>
+        <li>Hinteres Knie Richtung Boden absenken</li>
+        <li>Vorderes Bein drückt dich wieder nach oben</li>
+        <li>Knie sollte stabil über dem Fuß bleiben – nicht nach innen kippen</li>
+      </ul>
+    </div>
+  </div>
+
+     <!-- ── BHip Thrust ── -->
+  <div class="ex-desc-card">
+    <div class="ex-desc-media">
+     
+      <-- Grafik: <img src="hipthrust.png" alt="Name der Übung"> -->
+      
+    </div>
+    <div class="ex-desc-body">
+      <div class="ex-desc-header">
+        <div class="ex-desc-name">Hip Thrust</div>
+        <span class="badge badge-hd">Hip Dips</span>
+
+      </div>
+      <div class="ex-desc-text">
+        Oberer Rücken auf einer Bank, Füße am Boden:
+      </div>
+      <ul class="ex-desc-steps">
+        <li>Gesäß anspannen und Hüfte nach oben drücken</li>
+        <li>Oberkörper und Oberschenkel bilden eine Linie</li>
+        <li>Kurz halten, dann kontrolliert absenken</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Seated Lateral Raise ── -->
+  <div class="ex-desc-card">
+    <div class="ex-desc-media">
+     
+      <-- Grafik: <img src="seatedlr.png" alt="Name der Übung"> -->
+      
+    </div>
+    <div class="ex-desc-body">
+      <div class="ex-desc-header">
+        <div class="ex-desc-name">Seated Lateral Raise</div>
+        <span class="badge badge-hd">Schultern</span>
+      </div>
+      <div class="ex-desc-text">
+        xxx
+      </div>
+      <ul class="ex-desc-steps">
+        <li>xxx</li>
+        <li>xxx</li>
+        <li>xxx</li>
+      </ul>
+    </div>
+  </div>
+
+  
   <div class="section">
     <div class="section-label">Progression</div>
     <div class="info-card">
